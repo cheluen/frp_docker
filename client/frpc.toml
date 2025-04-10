@@ -1,0 +1,23 @@
+# frpc.toml
+serverAddr = "your_vps_public_ip" # 请替换为你的 VPS 公网 IP 地址
+serverPort = 7000
+
+# 与服务端 frps.toml 中配置的令牌保持一致
+auth.token = "your_secure_token" # 请务必与服务端配置的令牌一致
+
+# 定义一个示例 TCP 端口映射规则
+# 将本地的 8080 端口映射到服务端的 8080 端口
+[[proxies]]
+name = "web_app"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 8080
+remotePort = 8080
+
+# 你可以根据需要添加更多代理规则
+# [[proxies]]
+# name = "ssh_service"
+# type = "tcp"
+# localIP = "127.0.0.1"
+# localPort = 22
+# remotePort = 6000 # 映射到服务端的 6000 端口

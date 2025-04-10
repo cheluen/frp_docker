@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frpc:
+    build:
+      context: .
+      args:
+        # 构建时可以指定 FRP 版本和架构，默认为 Dockerfile 中的值
+        # FRP_VERSION: 0.58.0
+        # ARCH: amd64 # 根据你的本地机器架构调整，常见的有 amd64, arm64
+    container_name: frpc_client
+    restart: always
+    network_mode: "host" # 使用 host 网络模式
+    volumes:
+      # 将宿主机的配置文件挂载到容器中，方便修改配置而无需重建镜像
+      # 注意：如果使用挂载卷，Dockerfile 中的 COPY 指令会被覆盖
+      # - ./frpc.toml:/frp/frpc.toml
+      # 如果你希望容器启动时始终使用 Dockerfile 中复制的配置，请注释掉上面的 volume 挂载
+      # 将日志输出到宿主机文件 (可选)
+      # - ./logs:/frp/logs # 假设 FRP 配置了日志文件输出路径
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

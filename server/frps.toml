@@ -1,0 +1,10 @@
+# frps.toml
+bindPort = 7000
+# 服务端 dashboard 配置
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "admin" # 请务必修改为强密码
+
+# 身份验证令牌，客户端需要配置相同的令牌才能连接
+auth.token = "your_secure_token" # 请务必修改为安全的令牌
